@@ -1,4 +1,5 @@
 <script lang="ts">
+  let title = "";
   export let setTitle: (title: string) => void;
   export let availableTitles: string[] = [];
   export let onClose: () => void;
@@ -6,11 +7,12 @@
 
 <div class="modal">
   <h2>Choose a title</h2>
-  <select on:change={(e) => setTitle(e.target.value)}>
+  <select bind:value={title} on:change={(e) => setTitle(e.target.value)}>
     {#each availableTitles as title}
       <option value={title}>{title}</option>
     {/each}
   </select>
+  <button on:click={() => setTitle(title)}>Use</button>
   <button on:click={onClose}>Close</button>
 </div>
 
