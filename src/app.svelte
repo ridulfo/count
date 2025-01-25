@@ -1,6 +1,7 @@
 <script lang="ts">
   import PickerModal from "./lib/picker-modal.svelte";
-  let title = "";
+  let title = window.location.hash.replace("#", "");
+  $: window.location.hash = title;
   // TODO: convert to a timestamp + increment for future-proofing
   $: count = getInitialCount(title);
   $: countShown = getCountTotal(title);
