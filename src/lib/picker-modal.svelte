@@ -4,6 +4,7 @@
   export let availableTitles: string[] = [];
   export let onClose: () => void;
 </script>
+<div class="background"></div>
 
 <div class="modal">
   <h2>Choose a title</h2>
@@ -17,12 +18,22 @@
 </div>
 
 <style>
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
   .modal {
+    font-family: sans-serif;
     position: fixed;
     background-color: var(--cornsilk);
     padding: 1rem;
     border-radius: 0.5rem;
-    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 10px 10px 0 black;
     z-index: 1000;
     display: flex;
     flex-direction: column;
@@ -39,7 +50,7 @@
   button {
     background-color: var(--cornsilk);
     color: black;
-    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 0 black;
     border: 2px solid black;
     padding: 10px 20px;
     border-radius: 5px;
