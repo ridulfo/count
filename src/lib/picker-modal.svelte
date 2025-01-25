@@ -1,12 +1,16 @@
 <script lang="ts">
+  import { fade } from "svelte/transition";
+  import Background from "./background.svelte";
+
   let title = "";
   export let setTitle: (title: string) => void;
   export let availableTitles: string[] = [];
   export let onClose: () => void;
 </script>
-<div class="background"></div>
 
-<div class="modal">
+<Background onClick={onClose} />
+
+<div transition:fade class="modal">
   <h2>Choose a title</h2>
   <select bind:value={title} on:change={(e) => setTitle(e.target.value)}>
     {#each availableTitles as title}
@@ -18,15 +22,6 @@
 </div>
 
 <style>
-  .background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-  }
   .modal {
     font-family: sans-serif;
     position: fixed;

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Chart from "./lib/chart.svelte";
   import ListIcon from "./lib/list-icon.svelte";
   import PickerModal from "./lib/picker-modal.svelte";
   let title = window.location.hash.replace("#", "");
@@ -7,6 +8,7 @@
   $: count = getInitialCount(title);
   $: countShown = getCountTotal(title);
   let isChoosing = false;
+  let isViewingChart = false;
 
   type Count = {
     title: string;
@@ -53,7 +55,7 @@
 </script>
 
 <main>
-  <h1 class="rubik-moonrocks-regular">Count</h1>
+  <h1 on:click={() => (title = "")} class="rubik-moonrocks-regular">Count</h1>
   <div class="input-wrapper">
     <input type="text" bind:value={title} placeholder="Enter title" />
     <button
@@ -74,9 +76,15 @@
       }}
     />
   {/if}
+  {#if isViewingChart && count.values.length > 0}
+    <Chart onClose={() => (isViewingChart = false)} />
+  {/if}
   <div class="count-box">
     <button class="increment-button" on:click={increment(-1)}>-</button>
-    <span class="count rubik-moonrocks-regular">{countShown}</span>
+    <span
+      on:click={() => (isViewingChart = true)}
+      class="count rubik-moonrocks-regular">{countShown}</span
+    >
     <button class="increment-button" on:click={increment(1)}>+</button>
   </div>
 </main>
@@ -123,6 +131,7 @@
 
   .count {
     font-size: 6rem;
+    cursor: pointer;
   }
 
   .increment-button {
